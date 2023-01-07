@@ -1,48 +1,61 @@
-import React from "react";
+import { FormEvent, FunctionComponent, useState } from "react";
 
-export default function index() {
+interface FormProps {
+  onSubmit: (first: string, last: string) => void;
+}
+
+const Form: FunctionComponent<FormProps> = ({ onSubmit }) => {
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSubmit(first, last);
+  };
+
   return (
-    <div className="mt-12">
-      <div className="text-center text-2xl mb-4 text-blue-500">Login Form</div>
-
-      <form className="mx-auto max-w-sm">
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="usernameOrEmail"
-          >
-            Email or Username
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="usernameOrEmail"
-            type="text"
-            placeholder="Email or Username"
-          ></input>
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="Password"
-          ></input>
-        </div>
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Sign In
-          </button>
-        </div>
+    <div className="shadow-md w-1/2 mx-auto mt-24">
+      <form
+        className="flex flex-col items-center justify-center w-1/3 mx-auto p-4"
+        onSubmit={handleSubmit}
+      >
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="first"
+        >
+          First name:
+        </label>
+        <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          id="first"
+          name="first"
+          value={first}
+          onChange={(event) => setFirst(event.target.value)}
+        />
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2 mt-4"
+          htmlFor="last"
+        >
+          Last name:
+        </label>
+        <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          id="last"
+          name="last"
+          value={last}
+          onChange={(event) => setLast(event.target.value)}
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
-}
+};
+
+export default Form;
