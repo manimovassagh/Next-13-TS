@@ -17,7 +17,6 @@ const Form: FunctionComponent<FormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(usernameOrEmail, password);
 
     const data = { usernameOrEmail, password };
 
@@ -27,8 +26,9 @@ const Form: FunctionComponent<FormProps> = ({ onSubmit }) => {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((response) => {
+      .then((response) => { 
         console.log(response);
+        localStorage.setItem("token", response.accessToken);
       });
   };
 
