@@ -20,10 +20,31 @@ export default function Post() {
     setContent(event.target.value);
   };
 
+  const data = {
+    title: title,
+    description: description,
+    content: content,
+  };
+
+  const options = {
+    method: "post",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const handleCreatePost = (event: any) => {
     event.preventDefault();
-    console.log(content, description, title);
-    console.log("handle create is working");
+    fetch("http://localhost:8085/api/v1/posts", options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
