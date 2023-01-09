@@ -29,15 +29,15 @@ export default function Post() {
   const options = {
     method: "post",
     body: JSON.stringify(data),
+    mode: "no-cors",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJtYW5pLm1naEBnbWFpbC5jb20iLCJpYXQiOjE2NzMyMjk0NTksImV4cCI6MTY3MzgzNDI1OX0.p3yD2Ut0cLMG6MV6C-vzkj6br0Jc5g0_-GHMYtv8ZD87rM1SgRBtV2COwprCVplm`,
     },
   };
   const handleCreatePost = (event: any) => {
     event.preventDefault();
-    fetch("http://localhost:8085/api/v1/posts", options)
+    fetch("http://127.0.0.1:8085/api/v1/posts", options as any)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -59,7 +59,8 @@ export default function Post() {
             Post Title
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full 
+            py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="title"
             type="text"
             placeholder="Title"
@@ -76,7 +77,8 @@ export default function Post() {
             Post Description
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full 
+            py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="description"
             type="text"
             placeholder="Description"
@@ -93,7 +95,8 @@ export default function Post() {
             Post Content
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full 
+            py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="content"
             type="text"
             placeholder="Content"
@@ -103,7 +106,8 @@ export default function Post() {
         </div>
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold 
+            py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
             onClick={() => handleCreatePost(event)}
           >
