@@ -10,6 +10,7 @@ export default function Post() {
   useEffect(() => {
     setToken(localStorage.getItem("token") as string);
   }, []);
+  
   const handleTitleChange = (event: any) => {
     setTitle(event.target.value);
   };
@@ -32,9 +33,11 @@ export default function Post() {
     mode: "no-cors",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
       Authorization: `Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJtYW5pLm1naEBnbWFpbC5jb20iLCJpYXQiOjE2NzMyMjk0NTksImV4cCI6MTY3MzgzNDI1OX0.p3yD2Ut0cLMG6MV6C-vzkj6br0Jc5g0_-GHMYtv8ZD87rM1SgRBtV2COwprCVplm`,
     },
   };
+  
   const handleCreatePost = (event: any) => {
     event.preventDefault();
     fetch("http://127.0.0.1:8085/api/v1/posts", options as any)
